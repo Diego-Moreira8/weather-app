@@ -1,6 +1,6 @@
 async function getWeather(cityName) {
   let response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=f665e17e864ad3ebcceb327ae8c2131a`,
+    `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${units.getCurrentUnit()}&appid=f665e17e864ad3ebcceb327ae8c2131a`,
     { mode: "cors" }
   );
   response = await response.json();
@@ -45,3 +45,46 @@ function renderWeather(weatherObj) {
   minTemp.textContent = weatherObj.main.temp_min.toFixed(1);
   humidity.textContent = weatherObj.main.humidity;
 }
+
+const switchUnitsBtn = document.querySelector(".switch-units");
+
+const cToF = (temp) => (temp * 9) / 5 + 32;
+const fToC = (temp) => ((temp - 32) * 5) / 9;
+
+const units = (() => {
+  const tempUnits = document.querySelectorAll(".temp-unit");
+  const temperatures = document.querySelectorAll(".temperature");
+  let currentUnit;
+
+  if (currentUnit === undefined) {
+    currentUnit = "metric";
+  }
+
+  const getCurrentUnit = () => currentUnit;
+
+  const switchUnits = () => {
+    if (currentUnit === "metric") {
+      currentUnit = "imperial";
+      temperatures.forEach((element) => {
+        element.textContent = cToF(element.innerText).toFixed(1);
+      });
+      tempUnits.forEach((element) => {
+        element.textContent = "ºF";
+      });
+      switchUnitsBtn.textContent = "Mostrar em ºC";
+    } else if (currentUnit === "imperial") {
+      currentUnit = "metric";
+      temperatures.forEach((element) => {
+        element.textContent = fToC(element.innerText).toFixed(1);
+      });
+      tempUnits.forEach((element) => {
+        element.textContent = "ºC";
+      });
+      switchUnitsBtn.textContent = "Mostrar em ºF";
+    }
+  };
+
+  return { switchUnits, getCurrentUnit };
+})();
+
+switchUnitsBtn.addEventListener("click", units.switchUnits);
