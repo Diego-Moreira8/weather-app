@@ -35,7 +35,13 @@ function renderWeather(weatherObj) {
   const currentTemperature = weatherContainer.querySelector(
     ".current-temperature"
   );
+  const maxTemp = weatherContainer.querySelector(".max-temperature");
+  const minTemp = weatherContainer.querySelector(".min-temperature");
+  const humidity = weatherContainer.querySelector(".humidity");
 
   cityName.textContent = weatherObj.name;
-  currentTemperature.textContent = weatherObj.main.temp;
+  currentTemperature.textContent = weatherObj.main.temp.toFixed(1);
+  maxTemp.textContent = weatherObj.main.temp_max.toFixed(1);
+  minTemp.textContent = weatherObj.main.temp_min.toFixed(1);
+  humidity.textContent = weatherObj.main.humidity;
 }
