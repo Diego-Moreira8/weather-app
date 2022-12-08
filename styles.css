@@ -1,3 +1,7 @@
 .loading-overlay {
   display: none;
 }
+
+.loading-overlay.active {
+  display: block;
+}
