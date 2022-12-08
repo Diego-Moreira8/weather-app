@@ -6,7 +6,13 @@ async function getWeather(cityName) {
 
   const cityWeather = await response.json();
 
-  console.log(cityWeather.name);
+  console.log(cityWeather);
 }
 
-getWeather("catalao");
+const searchBar = document.querySelector("#city-search-bar");
+searchBar.addEventListener("submit", submitSearch);
+function submitSearch(e) {
+  e.preventDefault();
+  const input = e.target[0].value;
+  getWeather(input);
+}
