@@ -1,11 +1,8 @@
-async function getWeather(cityName) {
-  let response = await fetch(
+const getWeather = async (cityName) =>
+  await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${units.getCurrentUnit()}&appid=f665e17e864ad3ebcceb327ae8c2131a`,
     { mode: "cors" }
   );
-  response = await response.json();
-  return response;
-}
 
 const loadingOverlay = (() => {
   const overlay = document.querySelector(".loading-overlay");
@@ -20,12 +17,35 @@ searchBar.addEventListener("submit", submitSearch);
 function submitSearch(e) {
   // Calls API with the input and render content
   e.preventDefault();
-  const input = e.target[0].value;
   loadingOverlay.enable();
-  getWeather(input).then((response) => renderWeather(response));
+
+  const input = e.target[0].value;
+
+  getWeather(input)
+    .then((response) => {
+      if (!response.ok) throw new Error("Error on fetch");
+      else return response.json();
+    })
+    .then((response) => renderWeather(response))
+    .catch((error) => showError(error));
+}
+
+function showError(error) {
+  loadingOverlay.disable();
+  console.error(error);
+
+  const errorMsgElement = document.querySelector(".error-message");
+
+  errorMsgElement.textContent =
+    "Não encontramos uma cidade com este nome, tente novamente!";
+
+  setTimeout(() => {
+    errorMsgElement.textContent = "";
+  }, 5000);
 }
 
 function renderWeather(weatherObj) {
+  alert();
   console.log(weatherObj);
 
   loadingOverlay.disable();

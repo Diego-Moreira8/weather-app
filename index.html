@@ -11,8 +11,9 @@
   <body>
     <form id="city-search-bar">
       <label for="city-name">Buscar cidade:</label>
-      <input type="text" name="city-name" id="city-name" />
+      <input type="text" name="city-name" id="city-name" required />
       <button type="submit">🔎</button>
+      <div class="error-message"></div>
     </form>
 
     <button type="button" class="switch-units">Mostrar em ºF</button>
