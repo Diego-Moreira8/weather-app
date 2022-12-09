@@ -9,34 +9,47 @@
     <title>Weather App</title>
   </head>
   <body>
-    <form id="city-search-bar">
-      <label for="city-name">Buscar cidade:</label>
-      <input type="text" name="city-name" id="city-name" required />
-      <button type="submit">🔎</button>
-      <div class="error-message">
-        Não encontramos uma cidade com este nome, tente novamente!
-      </div>
-    </form>
+    <header>
+      <div class="brand">Clima</div>
 
-    <button type="button" class="switch-units">Mostrar em ºF</button>
+      <form id="city-search-bar">
+        <label for="city-name">Buscar cidade:</label>
+        <input type="text" name="city-name" id="city-name" required />
+        <button type="submit">🔎</button>
+
+        <div class="error-message">
+          Não encontramos uma cidade com este nome, tente novamente!
+        </div>
+      </form>
+
+      <button type="button" class="switch-units">Mostrar em ºF</button>
+    </header>
 
     <div id="weather-container">
       <div class="loading-overlay">Carregando...</div>
+
       <div class="city-name"></div>
+
       <div>
         <span class="current-temperature temperature">--</span
         ><span class="temp-unit">ºC</span>
       </div>
+
       <div>
         Máx: <span class="max-temperature temperature">--</span
         ><span class="temp-unit">ºC</span>
       </div>
+
       <div>
         Min: <span class="min-temperature temperature">--</span
         ><span class="temp-unit">ºC</span>
       </div>
+
       <div>Umidade: <span class="humidity">--</span>%</div>
     </div>
+
+    <footer>Rodapé</footer>
+
     <script src="./index.js"></script>
   </body>
 </html>

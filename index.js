@@ -118,7 +118,7 @@ switchUnitsBtn.addEventListener("click", units.switchUnits);
 
   loadingOverlay.enable();
 
-  getWeather("São Paulo")
+  getWeather("Catalão")
     .then((response) => {
       if (!response.ok) throw new Error("Error on fetch");
       else return response.json();
