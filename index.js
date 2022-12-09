@@ -32,15 +32,15 @@ function submitSearch(e) {
 
 function showError(error) {
   loadingOverlay.disable();
+
   console.error(error);
 
   const errorMsgElement = document.querySelector(".error-message");
 
-  errorMsgElement.textContent =
-    "Não encontramos uma cidade com este nome, tente novamente!";
+  errorMsgElement.classList.add("active");
 
   setTimeout(() => {
-    errorMsgElement.textContent = "";
+    errorMsgElement.classList.remove("active");
   }, 5000);
 }
 

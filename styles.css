@@ -1,7 +1,9 @@
-.loading-overlay {
+.loading-overlay,
+.error-message {
   display: none;
 }
 
-.loading-overlay.active {
+.loading-overlay.active,
+.error-message.active {
   display: block;
 }
