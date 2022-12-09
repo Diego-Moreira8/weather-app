@@ -15,7 +15,8 @@ const searchBar = document.querySelector("#city-search-bar");
 searchBar.addEventListener("submit", submitSearch);
 
 function submitSearch(e) {
-  // Calls API with the input and render content
+  // Calls the API with the input and render content or throw an error
+
   e.preventDefault();
   loadingOverlay.enable();
 
@@ -31,22 +32,17 @@ function submitSearch(e) {
 }
 
 function showError(error) {
-  loadingOverlay.disable();
-
   console.error(error);
-
+  loadingOverlay.disable();
   const errorMsgElement = document.querySelector(".error-message");
-
   errorMsgElement.classList.add("active");
-
   setTimeout(() => {
     errorMsgElement.classList.remove("active");
   }, 5000);
 }
 
 function renderWeather(weatherObj) {
-  alert();
-  console.log(weatherObj);
+  // console.log(weatherObj);
 
   loadingOverlay.disable();
 
@@ -72,39 +68,61 @@ const cToF = (temp) => (temp * 9) / 5 + 32;
 const fToC = (temp) => ((temp - 32) * 5) / 9;
 
 const units = (() => {
-  const tempUnits = document.querySelectorAll(".temp-unit");
-  const temperatures = document.querySelectorAll(".temperature");
+  /* Tracks the current temperature unit and
+  return functions for get and switch units */
+
   let currentUnit;
-
-  if (currentUnit === undefined) {
-    currentUnit = "metric";
-  }
-
+  if (currentUnit === undefined) currentUnit = "metric";
   const getCurrentUnit = () => currentUnit;
 
+  const tempUnits = document.querySelectorAll(".temp-unit");
+  const temperatures = document.querySelectorAll(".temperature");
+
   const switchUnits = () => {
+    // Convert the temperatures and changes the temperature units
+
     if (currentUnit === "metric") {
       currentUnit = "imperial";
+
       temperatures.forEach((element) => {
         element.textContent = cToF(element.innerText).toFixed(1);
       });
+
       tempUnits.forEach((element) => {
         element.textContent = "ºF";
       });
+
       switchUnitsBtn.textContent = "Mostrar em ºC";
     } else if (currentUnit === "imperial") {
       currentUnit = "metric";
+
       temperatures.forEach((element) => {
         element.textContent = fToC(element.innerText).toFixed(1);
       });
+
       tempUnits.forEach((element) => {
         element.textContent = "ºC";
       });
+
       switchUnitsBtn.textContent = "Mostrar em ºF";
     }
   };
 
-  return { switchUnits, getCurrentUnit };
+  return { getCurrentUnit, switchUnits };
 })();
 
 switchUnitsBtn.addEventListener("click", units.switchUnits);
+
+(init = () => {
+  // Fetch São Paulo weather on page load
+
+  loadingOverlay.enable();
+
+  getWeather("São Paulo")
+    .then((response) => {
+      if (!response.ok) throw new Error("Error on fetch");
+      else return response.json();
+    })
+    .then((response) => renderWeather(response))
+    .catch((error) => showError(error));
+})();
