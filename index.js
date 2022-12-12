@@ -1,3 +1,5 @@
+import myFooter from "./my-footer.js";
+
 const getWeather = async (cityName) =>
   await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${units.getCurrentUnit()}&appid=f665e17e864ad3ebcceb327ae8c2131a`,
@@ -113,7 +115,7 @@ const units = (() => {
 
 switchUnitsBtn.addEventListener("click", units.switchUnits);
 
-(init = () => {
+(function init() {
   // Fetch São Paulo weather on page load
 
   loadingOverlay.enable();
@@ -125,4 +127,6 @@ switchUnitsBtn.addEventListener("click", units.switchUnits);
     })
     .then((response) => renderWeather(response))
     .catch((error) => showError(error));
+
+  myFooter("#fff", "#ffffff47");
 })();
