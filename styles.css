@@ -6,6 +6,13 @@
   font-family: sans-serif;
 }
 
+header,
+#weather-container,
+footer {
+  background-color: #ffffff52;
+  backdrop-filter: blur(5px);
+}
+
 body {
   background: url(./media/bg-images/clouds.jpg);
   background-size: cover;
@@ -16,7 +23,6 @@ body {
 }
 
 header {
-  background-color: #ffffff47;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -139,7 +145,6 @@ header #city-search-bar button {
   margin: 8px;
   padding: 32px;
   border-radius: 4px;
-  background-color: #ffffff47;
   color: #fff;
   font-size: 1rem;
   text-align: center;
@@ -199,4 +204,16 @@ header .brand,
 #weather-container .min-temp-container,
 #weather-container .humidity-container {
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 720px) {
+  header #city-search-bar {
+    width: 600px;
+  }
+
+  #weather-container {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

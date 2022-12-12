@@ -128,5 +128,5 @@ switchUnitsBtn.addEventListener("click", units.switchUnits);
     .then((response) => renderWeather(response))
     .catch((error) => showError(error));
 
-  myFooter("#fff", "#ffffff47");
+  myFooter("#fff");
 })();
