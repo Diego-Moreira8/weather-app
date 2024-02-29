@@ -1,3 +1,3 @@
-const test: string = "Test";
+import getWeather from "./getWeather";
 
-console.log(test);
+getWeather("catalão");
