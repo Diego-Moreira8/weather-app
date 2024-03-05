@@ -1,5 +1,3 @@
-import getWeather from "./ui/getWeather";
-import renderUI from "./ui/renderUI";
+import getWeather from "./api/getWeather";
 
-renderUI();
-getWeather("catalão");
+getWeather("catalao");

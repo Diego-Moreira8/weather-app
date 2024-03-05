@@ -1,10 +1,13 @@
+import API_KEY from "./key";
 import WeatherData from "../interfaces/WeatherData";
 
-async function getWeather(city: string): Promise<WeatherData | null> {
-  const API_URL: string = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=f665e17e864ad3ebcceb327ae8c2131a`;
+export default async function getWeather(
+  city: string
+): Promise<WeatherData | null> {
+  const API_WEATHER: string = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
 
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(API_WEATHER);
     if (!response.ok) {
       throw new Error("Failed to fetch weather data");
     }
@@ -21,5 +24,3 @@ async function getWeather(city: string): Promise<WeatherData | null> {
     return null;
   }
 }
-
-export default getWeather;
