@@ -4,7 +4,14 @@ import getGeocode from "./getGeocode";
 export default async function getForecast(
   city: string
 ): Promise<Object | null> {
-  const { lat, lon } = await getGeocode(city);
+  const geoData = await getGeocode(city);
+
+  if (geoData === null) {
+    console.error("Error retrieving geocode. Impossible to request Forecast");
+    return null;
+  }
+
+  const { lat, lon } = geoData;
   const API_FORECAST: string = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
 
   try {
