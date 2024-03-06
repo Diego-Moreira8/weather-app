@@ -1,3 +1,6 @@
-import getWeather from "./api/getWeather";
+import getForecast from "./api/getForecast";
 
-getWeather("catalao");
+(async function testing() {
+  const forecastData = await getForecast("sao paulo");
+  console.log(forecastData);
+})();

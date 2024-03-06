@@ -29,8 +29,6 @@ export default async function getGeocode(
       lon: data[0].lon,
     };
 
-    console.log(geoData);
-
     return geoData;
   } catch (error) {
     console.error(error);

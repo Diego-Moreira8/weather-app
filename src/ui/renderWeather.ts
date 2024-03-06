@@ -1,5 +1,5 @@
 import WeatherData from "../interfaces/WeatherData";
-import getWeather from "../api/getWeather";
+import getWeather from "../api/getForecast";
 
 async function renderWeather(cityName: string) {
   const main: HTMLElement = document.querySelector("main");
