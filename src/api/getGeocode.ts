@@ -1,37 +1,28 @@
-// https://openweathermap.org/api/geocoding-api#direct_name_how
-
 import API_KEY from "./key";
-import GeoInfo from "../interfaces/GeoInfo";
+import GeoCode from "../interfaces/GeoCode";
 
-export default async function getGeocode(
+export default async function getGeoCode(
   city: string
-): Promise<GeoInfo | null> {
-  const API_GEOCODING = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`;
+): Promise<GeoCode | null> {
+  const geoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`;
 
   try {
-    const response = await fetch(API_GEOCODING);
+    const response = await fetch(geoCode);
 
     if (!response.ok) {
       throw new Error("Failed to fetch data");
     }
 
-    let data = await response.json();
+    let data: GeoCode[] = await response.json();
 
     if (data.length === 0) {
       throw new Error("City name not found");
     }
 
-    const geoData: GeoInfo = {
-      city: data[0].name,
-      state: data[0].state,
-      country: data[0].country,
-      lat: data[0].lat,
-      lon: data[0].lon,
-    };
-
-    return geoData;
+    return data[0];
   } catch (error) {
     console.error(error);
+
     return null;
   }
 }

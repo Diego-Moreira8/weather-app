@@ -1,34 +1,26 @@
 import API_KEY from "./key";
-import getGeocode from "./getGeocode";
+import GeoCode from "../interfaces/GeoCode";
+import Forecast from "../interfaces/Forecast";
 
 export default async function getForecast(
-  city: string
-): Promise<Array<object> | null> {
-  const geoData = await getGeocode(city);
-
-  if (geoData === null) {
-    console.error("Error retrieving geocode. Impossible to request Forecast");
-    return null;
-  }
-
-  const { lat, lon } = geoData;
-  const API_CURRENT_WEATHER: string = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
-  const API_FORECAST: string = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+  geoCode: GeoCode
+): Promise<Forecast | null> {
+  const { lat, lon } = geoCode;
+  const forecast: string = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
 
   try {
-    const currWeatherResponse = await fetch(API_CURRENT_WEATHER);
-    const forecastResponse = await fetch(API_FORECAST);
+    const reponse = await fetch(forecast);
 
-    if (!currWeatherResponse.ok && !forecastResponse.ok) {
+    if (!reponse.ok) {
       throw new Error("Failed to fetch data");
     }
 
-    const currWeatherData = await currWeatherResponse.json();
-    const forecastData = await forecastResponse.json();
+    const data: Forecast = await reponse.json();
 
-    return [currWeatherData, forecastData];
+    return data;
   } catch (error) {
     console.error(error);
+
     return null;
   }
 }

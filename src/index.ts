@@ -1,10 +1,17 @@
+import getCurrentWeather from "./api/getCurrentWeather";
 import getForecast from "./api/getForecast";
-import handleForecastData from "./api/handleForecastData";
+import getGeoCode from "./api/getGeoCode";
+import reduceForecastList from "./api/handleForecastData";
+import Forecast from "./interfaces/Forecast";
+import GeoCode from "./interfaces/GeoCode";
 
 (async function testing() {
-  const forecastData = await getForecast("kiev");
-  if (forecastData) {
-    const handledFCData = handleForecastData(forecastData);
-    console.log(handledFCData);
-  }
+  const geoCode: GeoCode = await getGeoCode("Catalão");
+  const currentWeather = await getCurrentWeather(geoCode);
+  const forecast: Forecast = await getForecast(geoCode);
+  const reducedForecastList = reduceForecastList(forecast.list);
+
+  console.log(currentWeather);
+  console.log(forecast);
+  console.table(reducedForecastList);
 })();

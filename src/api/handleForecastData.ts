@@ -1,70 +1,61 @@
-import Forecast from "../interfaces/Forecast";
-import WeekForecast from "../interfaces/WeekForecast";
+import { List as ForecastList } from "../interfaces/Forecast";
 
-// TODO: CREATE INTERFACES FOR THE API DATA
+interface ReducedForecast {
+  day: Date;
+  condition: string;
+  iconCode: string;
+}
 
-export default function handleForecastData(data: any): Forecast {
-  const [currWeatherData, forecastData] = data;
+export default function reduceForecastList(
+  list: ForecastList[]
+): ReducedForecast[] {
+  /*
+    Return an array with the most important conditions 
+    with its icons for the next 5 days.
+  */
 
-  const generate5DayForecast = (): WeekForecast[] => {
-    /*
-      Return a WeekForecast array with the most important conditions 
-      with its icons for the next 5 days.
-    */
+  const CONDITIONS: string[] = [
+    "clear",
+    "clouds",
+    "atmosphere",
+    "drizzle",
+    "rain",
+    "snow",
+    "thunderstorm",
+  ]; // The more severe the condition, the higher its index
 
-    const CONDITIONS: string[] = [
-      "clear",
-      "clouds",
-      "atmosphere",
-      "drizzle",
-      "rain",
-      "snow",
-      "thunderstorm",
-    ]; // The more severe the condition, the higher its index
-    const result: WeekForecast[] = [];
-    const today = new Date();
+  const result: ReducedForecast[] = [];
+  const today = new Date();
 
-    for (let item of forecastData.list) {
-      const itemDate = new Date(item["dt"] * 1000);
-      const itemCondition = String(item["weather"][0]["main"]).toLowerCase();
-      const itemIconCode = String(item["weather"][0]["icon"]);
-      const lastPushedItem = result.length ? result[result.length - 1] : null;
+  for (let item of list) {
+    const itemDate = new Date(item.dt * 1000);
+    const itemCondition = item.weather[0].main.toLowerCase();
+    const itemIconCode = item.weather[0].icon;
+    const lastPushedItem: ReducedForecast = result.length
+      ? result[result.length - 1]
+      : null;
 
-      //console.log(itemDate.getDate(), itemCondition);
-
-      if (itemDate.getDate() > today.getDate()) {
+    if (itemDate.getDate() > today.getDate()) {
+      if (
+        lastPushedItem &&
+        lastPushedItem.day.getDate() === itemDate.getDate()
+      ) {
         if (
-          lastPushedItem &&
-          lastPushedItem.day.getDate() === itemDate.getDate()
+          CONDITIONS.indexOf(itemCondition) >
+          CONDITIONS.indexOf(lastPushedItem.condition)
         ) {
-          if (
-            CONDITIONS.indexOf(itemCondition) >
-            CONDITIONS.indexOf(lastPushedItem.condition)
-          ) {
-            lastPushedItem.condition = itemCondition;
-            lastPushedItem.iconCode = itemIconCode;
-          }
-        } else {
-          result.push({
-            day: itemDate,
-            condition: itemCondition,
-            iconCode: itemIconCode,
-          });
+          lastPushedItem.condition = itemCondition;
+          lastPushedItem.iconCode = itemIconCode;
         }
+      } else {
+        result.push({
+          day: itemDate,
+          condition: itemCondition,
+          iconCode: itemIconCode,
+        });
       }
     }
+  }
 
-    return result;
-  };
-
-  const forecast: Forecast = {
-    cityName: currWeatherData.name,
-    temp: currWeatherData.main.temp,
-    max: currWeatherData.main.temp_max,
-    min: currWeatherData.main.temp_min,
-    icon: currWeatherData.weather[0].icon,
-    weekForecast: generate5DayForecast(),
-  };
-
-  return forecast;
+  return result;
 }
