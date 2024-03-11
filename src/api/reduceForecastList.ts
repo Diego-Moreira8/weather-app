@@ -1,10 +1,5 @@
 import { List as ForecastList } from "../interfaces/Forecast";
-
-interface ReducedForecast {
-  day: Date;
-  condition: string;
-  iconCode: string;
-}
+import ReducedForecast from "../interfaces/ReducedForecast";
 
 export default function reduceForecastList(
   list: ForecastList[]
