@@ -1,10 +1,6 @@
-import getCurrentWeather from "./api/getCurrentWeather";
-import getForecast from "./api/getForecast";
-import getGeoCode from "./api/getGeoCode";
-import reduceForecastList from "./api/reduceForecastList";
+import handleSearch from "./components/handleSearch";
 import renderNav from "./components/renderNav";
-import renderWeather from "./components/renderWeather";
-import "./styles/styles.scss";
+import "./styles.scss";
 
 const root = document.querySelector("#root");
 const main = document.createElement("main");
@@ -14,10 +10,6 @@ root.appendChild(main);
 root.appendChild(nav);
 
 (async function () {
-  const geoCode = await getGeoCode("las vegas");
-  const currWeather = await getCurrentWeather(geoCode);
-  const forecast = await getForecast(geoCode);
-  const reducedForecast = reduceForecastList(forecast.list);
-  renderWeather(currWeather, reducedForecast);
+  await handleSearch("Catalão");
   renderNav();
 })();

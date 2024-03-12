@@ -1,3 +1,5 @@
+import handleSearch from "./handleSearch";
+
 const HIDDEN = "hidden";
 
 export default function renderNav(): void {
@@ -11,6 +13,9 @@ export default function renderNav(): void {
 
   const openSearch = () => searchOverlay.classList.remove(HIDDEN);
   const closeSearch = () => searchOverlay.classList.add(HIDDEN);
+  const getEnterPress = (e: KeyboardEvent) => {
+    if (e.key === "Enter") handleSearch(input.value);
+  };
 
   openSearchBtn.textContent = "Open search";
   searchBtn.textContent = "Search";
@@ -22,6 +27,8 @@ export default function renderNav(): void {
 
   openSearchBtn.addEventListener("click", openSearch);
   searchOverlay.addEventListener("click", closeSearch);
+  input.addEventListener("keyup", getEnterPress);
+  searchBtn.addEventListener("click", () => handleSearch(input.value));
 
   searchContainer.appendChild(label);
   searchContainer.appendChild(input);
