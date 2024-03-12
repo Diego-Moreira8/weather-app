@@ -11,7 +11,7 @@ const main = document.createElement("main");
 root.appendChild(main);
 
 (async function () {
-  const geoCode = await getGeoCode("Londres");
+  const geoCode = await getGeoCode("las vegas");
   const currWeather = await getCurrentWeather(geoCode);
   const forecast = await getForecast(geoCode);
   const reducedForecast = reduceForecastList(forecast.list);
