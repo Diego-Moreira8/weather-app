@@ -46,7 +46,7 @@ export default function renderWeather(
 
     weekday.textContent = capitalizeFirstLetter(weekDayText);
 
-    dayIcon.src = getIconByCode(item.iconCode);
+    dayIcon.src = getIconByCode(item.iconCode.replace("n", "d"));
     dayIcon.title = conditionText;
     dayIcon.alt = conditionText;
 
