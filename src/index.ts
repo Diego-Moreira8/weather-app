@@ -3,6 +3,7 @@ import getForecast from "./api/getForecast";
 import getGeoCode from "./api/getGeoCode";
 import reduceForecastList from "./api/reduceForecastList";
 import renderWeather from "./components/renderWeather";
+import "./styles/styles.scss";
 
 const root = document.querySelector("#root");
 const main = document.createElement("main");
