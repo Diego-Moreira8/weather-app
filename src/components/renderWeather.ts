@@ -9,6 +9,7 @@ export default function renderWeather(
 ): void {
   const main = document.querySelector("main");
   const cityName = document.createElement("h1");
+  const currentTempsGroup = document.createElement("div");
   const maxTempGroup = document.createElement("div");
   const maxTempText = document.createElement("p");
   const maxTemp = document.createElement("p");
@@ -16,8 +17,9 @@ export default function renderWeather(
   const minTempGroup = document.createElement("div");
   const minTempText = document.createElement("p");
   const minTemp = document.createElement("p");
+  const currentTempIconContainer = document.createElement("div");
   const currentTempIcon = document.createElement("img");
-  const forecastGroup = document.createElement("div");
+  const forecastGroup = document.createElement("ul");
   const descriptionText = capitalizeFirstLetter(
     currWeather.weather[0].description
   );
@@ -25,22 +27,36 @@ export default function renderWeather(
   main.innerHTML = "";
 
   cityName.textContent = currWeather.name;
-  maxTempText.textContent = "Máx.:";
-  maxTemp.textContent = `${currWeather.main.temp_max}`;
-  currentTemp.textContent = `${currWeather.main.temp}`;
-  minTempText.textContent = "Mín.:";
-  minTemp.textContent = `${currWeather.main.temp_min}`;
+  maxTempText.textContent = "Máx.";
+  maxTemp.textContent = `${currWeather.main.temp_max.toFixed(0)}º`;
+  currentTemp.textContent = `${currWeather.main.temp.toFixed(0)}º`;
+  minTempText.textContent = "Mín.";
+  minTemp.textContent = `${currWeather.main.temp_min.toFixed(0)}º`;
+
+  currentTempsGroup.classList.add("current-temps-group");
+  cityName.classList.add("city-name");
+  maxTempGroup.classList.add("max-temp-group");
+  maxTempText.classList.add("max-temp-text");
+  maxTemp.classList.add("max-temp");
+  currentTemp.classList.add("current-temp");
+  minTempGroup.classList.add("min-temp-group");
+  minTempText.classList.add("min-temp-text");
+  minTemp.classList.add("min-temp");
+  currentTempIconContainer.classList.add("current-temp-icon-container");
+  currentTempIcon.classList.add("current-temp-icon");
+  forecastGroup.classList.add("forecast");
 
   currentTempIcon.src = getIconByCode(currWeather.weather[0].icon);
   currentTempIcon.title = descriptionText;
   currentTempIcon.alt = descriptionText;
 
   for (let item of forecast) {
-    const dayGroup = document.createElement("div");
+    const dayGroup = document.createElement("li");
     const weekday = document.createElement("p");
+    const dayIconContainer = document.createElement("div");
     const dayIcon = document.createElement("img");
     const weekDayText = new Intl.DateTimeFormat("pt-BR", {
-      weekday: "long",
+      weekday: "short",
     }).format(item.day);
     const conditionText = capitalizeFirstLetter(item.condition);
 
@@ -50,19 +66,27 @@ export default function renderWeather(
     dayIcon.title = conditionText;
     dayIcon.alt = conditionText;
 
+    dayIconContainer.classList.add("day-icon-container");
+    dayGroup.classList.add("day-group");
+    weekday.classList.add("weekday");
+    dayIcon.classList.add("day-icon");
+
     dayGroup.appendChild(weekday);
-    dayGroup.appendChild(dayIcon);
+    dayIconContainer.appendChild(dayIcon);
+    dayGroup.appendChild(dayIconContainer);
     forecastGroup.appendChild(dayGroup);
   }
 
   main.appendChild(cityName);
   maxTempGroup.appendChild(maxTempText);
   maxTempGroup.appendChild(maxTemp);
-  main.appendChild(maxTempGroup);
-  main.appendChild(currentTemp);
+  currentTempsGroup.appendChild(maxTempGroup);
+  currentTempsGroup.appendChild(currentTemp);
   minTempGroup.appendChild(minTempText);
   minTempGroup.appendChild(minTemp);
-  main.appendChild(currentTempIcon);
-  main.appendChild(minTempGroup);
+  currentTempsGroup.appendChild(minTempGroup);
+  main.appendChild(currentTempsGroup);
+  currentTempIconContainer.appendChild(currentTempIcon);
+  main.appendChild(currentTempIconContainer);
   main.appendChild(forecastGroup);
 }
