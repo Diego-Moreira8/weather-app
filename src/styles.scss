@@ -18,7 +18,7 @@ body {
     background: linear-gradient($day-bgc-top, $day-bgc-bottom);
     color: white;
     font-family: "Montserrat", sans-serif;
-    height: 100dvh;
+    min-height: 100dvh;
     display: flex;
     flex-flow: column;
     justify-content: space-between;
