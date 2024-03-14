@@ -7,6 +7,7 @@ export default function renderWeather(
   currWeather: CurrentWeather,
   forecast: ReducedForecast[]
 ): void {
+  const root = document.querySelector("#root");
   const main = document.querySelector("main");
   const cityName = document.createElement("h1");
   const currentTempsGroup = document.createElement("div");
@@ -25,6 +26,9 @@ export default function renderWeather(
   );
 
   main.innerHTML = "";
+
+  const itsNight = currWeather.weather[0].icon.endsWith("n");
+  root.classList[itsNight ? "add" : "remove"]("night");
 
   cityName.textContent = currWeather.name;
   maxTempText.textContent = "Máx.";

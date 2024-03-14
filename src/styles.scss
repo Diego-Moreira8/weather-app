@@ -1,5 +1,7 @@
 $day-bgc-top: #0073c8;
 $day-bgc-bottom: #48b1ff;
+$night-bgc-top: #000;
+$night-bgc-bottom: #323232;
 
 * {
   padding: 0;
@@ -21,6 +23,10 @@ body {
     flex-flow: column;
     justify-content: space-between;
     gap: 2rem;
+
+    &.night {
+      background: linear-gradient($night-bgc-top, $night-bgc-bottom);
+    }
 
     main {
       padding: 2rem;
