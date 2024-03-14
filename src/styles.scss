@@ -158,11 +158,11 @@ body {
           }
 
           .search-btn {
-            background-color: $day-bgc-top;
-            color: white;
+            background-color: transparent;
+            color: black;
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
-            border: none;
+            border: 1px solid black;
           }
         }
       }

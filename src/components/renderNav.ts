@@ -26,7 +26,7 @@ export default function renderNav(): void {
   };
 
   const getEnterPress = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && input.value) {
       handleSearch(input.value);
       searchOverlay.classList.add(HIDDEN);
     }
@@ -54,7 +54,13 @@ export default function renderNav(): void {
   openSearchBtn.addEventListener("click", openSearch);
   searchOverlay.addEventListener("click", handleOverlayClick);
   input.addEventListener("keyup", getEnterPress);
-  searchBtn.addEventListener("click", () => handleSearch(input.value));
+  searchBtn.addEventListener("click", () => {
+    if (input.value) {
+      handleSearch(input.value);
+      searchOverlay.classList.add(HIDDEN);
+    }
+    input.focus();
+  });
 
   searchContainer.appendChild(label);
   searchContainer.appendChild(input);

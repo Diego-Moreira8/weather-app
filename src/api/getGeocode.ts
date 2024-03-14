@@ -7,6 +7,10 @@ export default async function getGeoCode(
   const geoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`;
 
   try {
+    if (!city) {
+      throw new Error("Cannot fetch with an empty string");
+    }
+
     const response = await fetch(geoCode);
 
     if (!response.ok) {

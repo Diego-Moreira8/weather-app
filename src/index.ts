@@ -10,6 +10,6 @@ root.appendChild(main);
 root.appendChild(nav);
 
 (async function () {
-  await handleSearch("Catalão");
   renderNav();
+  await handleSearch("Catalão");
 })();
