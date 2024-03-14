@@ -1,4 +1,5 @@
 import handleSearch from "./components/handleSearch";
+import renderLoadingScreen from "./components/renderLoadingScreen";
 import renderNav from "./components/renderNav";
 import "./styles.scss";
 
@@ -11,5 +12,6 @@ root.appendChild(nav);
 
 (async function () {
   renderNav();
+  renderLoadingScreen();
   await handleSearch("Catalão");
 })();

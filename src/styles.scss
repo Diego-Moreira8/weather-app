@@ -3,6 +3,19 @@ $day-bgc-bottom: #48b1ff;
 $night-bgc-top: #000;
 $night-bgc-bottom: #323232;
 
+@mixin overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.456);
+  backdrop-filter: blur(5px);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -116,16 +129,7 @@ body {
       }
 
       .search-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100dvw;
-        height: 100dvh;
-        background-color: rgba(0, 0, 0, 0.456);
-        backdrop-filter: blur(5px);
+        @include overlay();
 
         &.hidden {
           visibility: hidden;
@@ -165,6 +169,23 @@ body {
             border: 1px solid black;
           }
         }
+      }
+    }
+
+    .loading-overlay {
+      @include overlay();
+      pointer-events: none;
+      opacity: 1;
+      transition: none;
+
+      &.hidden {
+        opacity: 0;
+        transition: opacity 500ms;
+      }
+
+      .loading-text {
+        font-weight: bold;
+        font-size: 1.5rem;
       }
     }
   }

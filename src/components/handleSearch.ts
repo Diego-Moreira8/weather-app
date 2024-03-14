@@ -5,7 +5,11 @@ import reduceForecastList from "../api/reduceForecastList";
 import renderWeather from "./renderWeather";
 
 export default async function handleSearch(cityName: string): Promise<void> {
+  const loadingScreen = document.querySelector(".loading-overlay");
+
   try {
+    loadingScreen.classList.remove("hidden");
+
     const geoCode = await getGeoCode(cityName);
 
     if (!geoCode) {
@@ -21,8 +25,10 @@ export default async function handleSearch(cityName: string): Promise<void> {
 
     const reducedForecast = reduceForecastList(forecast.list);
     renderWeather(currWeather, reducedForecast);
+    loadingScreen.classList.add("hidden");
   } catch (error) {
     console.error(error);
+    loadingScreen.classList.add("hidden");
     return;
   }
 }
