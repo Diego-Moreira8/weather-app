@@ -188,5 +188,27 @@ body {
         font-size: 1.5rem;
       }
     }
+
+    .error-msg-container {
+      position: fixed;
+      top: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100dvw - 6rem);
+      max-width: 600px;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      background-color: darkred;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+      opacity: 1;
+      transition: opacity 500ms;
+
+      &.hidden {
+        opacity: 0;
+      }
+    }
   }
 }
