@@ -1,0 +1,214 @@
+$day-bgc-top: #0073c8;
+$day-bgc-bottom: #48b1ff;
+$night-bgc-top: #000;
+$night-bgc-bottom: #323232;
+
+@mixin overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.456);
+  backdrop-filter: blur(5px);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+body {
+  #root {
+    background: linear-gradient($day-bgc-top, $day-bgc-bottom);
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    min-height: 100dvh;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    gap: 2rem;
+
+    &.night {
+      background: linear-gradient($night-bgc-top, $night-bgc-bottom);
+    }
+
+    main {
+      padding: 2rem;
+
+      h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .current-temps-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+
+        .max-temp-group,
+        .min-temp-group {
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+
+          .max-temp,
+          .min-temp {
+            font-weight: bold;
+          }
+        }
+
+        .current-temp {
+          font-size: 5rem;
+          font-weight: bold;
+        }
+      }
+
+      .current-temp-icon-container {
+        $size: 9rem;
+        width: $size;
+        height: $size;
+        margin: 2.5rem auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .current-temp-icon {
+          display: block;
+          width: 100%;
+        }
+      }
+
+      .forecast {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+        gap: 1.5rem;
+
+        .day-group {
+          display: flex;
+          flex-flow: column;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 0.5rem;
+
+          .day-icon-container {
+            $size: 2.5rem;
+            width: $size;
+            height: $size;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .day-icon {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    nav {
+      padding: 1rem;
+
+      .open-search-btn {
+        display: block;
+        background-color: transparent;
+        margin: 0 auto;
+        border: none;
+        padding: 0.5rem;
+      }
+
+      .search-overlay {
+        @include overlay();
+
+        &.hidden {
+          visibility: hidden;
+        }
+
+        .search-container {
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+          gap: 1rem;
+          width: fit-content;
+          padding: 1.5rem;
+          border-radius: 1rem;
+          background-color: #ffffffd9;
+          color: black;
+
+          input {
+            font-size: 1rem;
+            font-weight: bold;
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid grey;
+            text-align: center;
+            padding: 0.25rem;
+
+            &:focus {
+              outline: none;
+              border-bottom: 1px solid black;
+            }
+          }
+
+          .search-btn {
+            background-color: transparent;
+            color: black;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid black;
+          }
+        }
+      }
+    }
+
+    .loading-overlay {
+      @include overlay();
+      pointer-events: none;
+      opacity: 1;
+      transition: none;
+
+      &.hidden {
+        opacity: 0;
+        transition: opacity 500ms;
+      }
+
+      .loading-text {
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+    }
+
+    .error-msg-container {
+      position: fixed;
+      top: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100dvw - 6rem);
+      max-width: 600px;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      background-color: darkred;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+      opacity: 1;
+      transition: opacity 500ms;
+
+      &.hidden {
+        opacity: 0;
+      }
+    }
+  }
+}
