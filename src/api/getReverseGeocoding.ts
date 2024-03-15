@@ -5,7 +5,7 @@ export default async function getReverseGeocoding(
   browserGeolocation: GeolocationPosition
 ): Promise<GeoCode | null> {
   const { latitude, longitude } = browserGeolocation.coords;
-  const revGeocode = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
+  const revGeocode = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
 
   try {
     const response = await fetch(revGeocode);

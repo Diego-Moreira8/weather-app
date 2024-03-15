@@ -1,4 +1,4 @@
-import getGeoCode from "../api/getGeoCode";
+import getGeoCode from "../api/getGeocode";
 import getForecast from "../api/getForecast";
 import getCurrentWeather from "../api/getCurrentWeather";
 import reduceForecastList from "../api/reduceForecastList";

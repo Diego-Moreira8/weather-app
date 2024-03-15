@@ -6,7 +6,7 @@ export default async function getForecast(
   geoCode: GeoCode
 ): Promise<Forecast | null> {
   const { lat, lon } = geoCode;
-  const forecast: string = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+  const forecast: string = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
 
   try {
     const reponse = await fetch(forecast);

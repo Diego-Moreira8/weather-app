@@ -4,7 +4,7 @@ import GeoCode from "../interfaces/GeoCode";
 export default async function getGeoCode(
   city: string
 ): Promise<GeoCode | null> {
-  const geoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`;
+  const geoCode = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`;
 
   try {
     if (!city) {
