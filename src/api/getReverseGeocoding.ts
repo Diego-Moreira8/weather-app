@@ -1,24 +1,20 @@
-import API_KEY from "./key";
 import GeoCode from "../interfaces/GeoCode";
+import API_KEY from "./key";
 
-export default async function getGeoCode(
-  city: string
+export default async function getReverseGeocoding(
+  browserGeolocation: GeolocationPosition
 ): Promise<GeoCode | null> {
-  const geoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`;
+  const { latitude, longitude } = browserGeolocation.coords;
+  const revGeocode = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
 
   try {
-    if (!city) {
-      throw new Error("Cannot fetch with an empty string");
-    }
-
-    const response = await fetch(geoCode);
+    const response = await fetch(revGeocode);
 
     if (!response.ok) {
       throw new Error("Failed to fetch data");
     }
 
     const data: GeoCode[] = await response.json();
-
     if (data.length === 0) {
       throw new Error("City name not found");
     }
