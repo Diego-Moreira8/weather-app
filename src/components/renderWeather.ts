@@ -1,9 +1,11 @@
 import CurrentWeather from "../interfaces/CurrentWeather";
+import GeoCode from "../interfaces/GeoCode";
 import ReducedForecast from "../interfaces/ReducedForecast";
 import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 import getIconByCode from "../utils/getIconByCode";
 
 export default function renderWeather(
+  geoInfo: GeoCode,
   currWeather: CurrentWeather,
   forecast: ReducedForecast[]
 ): void {
@@ -30,7 +32,7 @@ export default function renderWeather(
   const itsNight = currWeather.weather[0].icon.endsWith("n");
   root.classList[itsNight ? "add" : "remove"]("night");
 
-  cityName.textContent = currWeather.name;
+  cityName.textContent = geoInfo.name;
   maxTempText.textContent = "Máx.";
   maxTemp.textContent = `${currWeather.main.temp_max.toFixed(0)}º`;
   currentTemp.textContent = `${currWeather.main.temp.toFixed(0)}º`;

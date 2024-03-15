@@ -24,7 +24,7 @@ export default async function handleSearch(cityName: string): Promise<void> {
     }
 
     const reducedForecast = reduceForecastList(forecast.list);
-    renderWeather(currWeather, reducedForecast);
+    renderWeather(geoCode, currWeather, reducedForecast);
     loadingScreen.classList.add("hidden");
   } catch (error) {
     console.error(error);
