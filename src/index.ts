@@ -1,11 +1,7 @@
-import getCurrentWeather from "./api/getCurrentWeather";
-import getForecast from "./api/getForecast";
 import getReverseGeocoding from "./api/getReverseGeocoding";
-import reduceForecastList from "./api/reduceForecastList";
 import handleSearch from "./components/handleSearch";
-import renderLoadingScreen from "./components/renderLoadingScreen";
+import createLoadingScreen from "./components/createLoadingScreen";
 import renderNav from "./components/renderNav";
-import renderWeather from "./components/renderWeather";
 import requestUserLocation from "./components/requestUserLocation";
 import "./styles.scss";
 
@@ -18,17 +14,11 @@ root.appendChild(nav);
 
 (async function () {
   renderNav();
-  renderLoadingScreen();
+  createLoadingScreen();
 
   const userLocation = await requestUserLocation();
 
-  if (userLocation) {
-    const geoCode = await getReverseGeocoding(userLocation);
-    const currWeather = await getCurrentWeather(geoCode);
-    const forecast = await getForecast(geoCode);
-    const reducedForecast = reduceForecastList(forecast.list);
-    renderWeather(geoCode, currWeather, reducedForecast);
-  } else {
-    await handleSearch("Brasília");
-  }
+  handleSearch(
+    userLocation ? await getReverseGeocoding(userLocation) : "Brasília"
+  );
 })();

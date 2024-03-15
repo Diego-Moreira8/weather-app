@@ -1,4 +1,4 @@
-export default function renderLoadingScreen(): void {
+export default function createLoadingScreen(): void {
   const root = document.querySelector("#root");
   const loadingOverlay = document.createElement("div");
   const loadingText = document.createElement("p");
