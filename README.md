@@ -1,6 +1,8 @@
 # Weather App
 
-Este é um projeto de um aplicativo de clima proposto pelo site [The Odin Project](https://www.theodinproject.com/) para fixar o aprendizado sobre requisições de dados de API de terceiros. O aplicativo foi escrito em TypeScript, SASS e emprega o Webpack para compilação e empacotamento.
+Este é um projeto de um aplicativo de clima proposto pelo site [The Odin Project](https://www.theodinproject.com/) para fixar o aprendizado sobre requisições de dados de API de terceiros. O aplicativo foi escrito em TypeScript, SASS e emprega o Webpack para compilação e empacotamento. O projeto está online em [diego-moreira8.github.io/weather-app](https://diego-moreira8.github.io/weather-app/).
+
+![Captura de tela do projeto](./src/images/project-screenshot.png)
 
 ## Funcionalidades
 
@@ -31,7 +33,7 @@ npm start
 
 Isso iniciará um servidor de desenvolvimento local e abrirá o aplicativo no seu navegador padrão.
 
-5. **Compilar para produção:**
+4. **Compilar para produção:**
 
 Se desejar compilar o aplicativo para produção, você pode usar o comando:
 
@@ -39,7 +41,7 @@ Se desejar compilar o aplicativo para produção, você pode usar o comando:
 npm run build
 ```
 
-Isso criará uma versão otimizada do aplicativo na pasta `docs/`.
+Isso criará uma versão otimizada do aplicativo na pasta `dist/`.
 
 ---
 
