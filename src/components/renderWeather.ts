@@ -10,6 +10,7 @@ import GeoCode from "../interfaces/GeoCode";
 import ReducedForecast from "../interfaces/ReducedForecast";
 import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 import getIconByCode from "../utils/getIconByCode";
+import getTranslatedCondition from "../utils/getTranslatedCondition";
 
 export default function renderWeather(
   geoInfo: GeoCode,
@@ -71,7 +72,9 @@ export default function renderWeather(
     const weekDayText = new Intl.DateTimeFormat("pt-BR", {
       weekday: "short",
     }).format(item.day);
-    const conditionText = capitalizeFirstLetter(item.condition);
+    const conditionText = capitalizeFirstLetter(
+      getTranslatedCondition(item.condition)
+    );
 
     weekday.textContent = capitalizeFirstLetter(weekDayText);
 
