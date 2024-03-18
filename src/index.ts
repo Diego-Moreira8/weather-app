@@ -12,7 +12,7 @@ const nav = document.createElement("nav");
 root.appendChild(main);
 root.appendChild(nav);
 
-(async function () {
+async function startUI() {
   renderNav();
   createLoadingScreen();
 
@@ -21,4 +21,6 @@ root.appendChild(nav);
   handleSearch(
     userLocation ? await getReverseGeocoding(userLocation) : "Brasília"
   );
-})();
+}
+
+window.onload = startUI;

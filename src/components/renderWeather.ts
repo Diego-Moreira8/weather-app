@@ -1,3 +1,10 @@
+/*
+  Renders weather information for a specified location.
+  It takes in geoInfo, currWeather, and forecast parameters
+  to display the current weather conditions and a forecast 
+  for upcoming days.
+*/
+
 import CurrentWeather from "../interfaces/CurrentWeather";
 import GeoCode from "../interfaces/GeoCode";
 import ReducedForecast from "../interfaces/ReducedForecast";

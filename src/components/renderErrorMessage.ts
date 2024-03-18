@@ -1,3 +1,11 @@
+/*
+  Renders an error message on the DOM for a specified duration, 
+  then removes it. 
+
+  @param error The Error object containing the error message to display.
+  @returns A Promise that resolves when the error message is removed.
+*/
+
 export default function renderErrorMessage(error: Error): Promise<void> {
   return new Promise((resolve) => {
     const root = document.querySelector("#root");

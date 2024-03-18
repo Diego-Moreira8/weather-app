@@ -1,4 +1,7 @@
-import WeatherIcon from "../interfaces/WeatherIcon";
+/*
+  Retrieves the corresponding weather icon directory 
+  based on the provided weather code.
+*/
 
 import brokenClouds from "../images/weather-icons/broken-clouds.svg";
 import dayClearSky from "../images/weather-icons/day-clear-sky.svg";
@@ -13,28 +16,27 @@ import showerRain from "../images/weather-icons/shower-rain.svg";
 import snow from "../images/weather-icons/snow.svg";
 import thunderstorm from "../images/weather-icons/thunderstorm.svg";
 
-const weatherIcons: WeatherIcon[] = [
-  { url: dayClearSky, code: "01d" },
-  { url: nightClearSky, code: "01n" },
-  { url: dayFewClouds, code: "02d" },
-  { url: nightFewClouds, code: "02n" },
-  { url: scatteredClouds, code: "03d" },
-  { url: scatteredClouds, code: "03n" },
-  { url: brokenClouds, code: "04d" },
-  { url: brokenClouds, code: "04n" },
-  { url: showerRain, code: "09d" },
-  { url: showerRain, code: "09n" },
-  { url: dayRain, code: "10d" },
-  { url: nightRain, code: "10n" },
-  { url: thunderstorm, code: "11d" },
-  { url: thunderstorm, code: "11n" },
-  { url: snow, code: "13d" },
-  { url: snow, code: "13n" },
-  { url: mist, code: "50d" },
-  { url: mist, code: "50n" },
-];
+const weatherIcons: Record<string, string> = {
+  "01d": dayClearSky,
+  "01n": nightClearSky,
+  "02d": dayFewClouds,
+  "02n": nightFewClouds,
+  "03d": scatteredClouds,
+  "03n": scatteredClouds,
+  "04d": brokenClouds,
+  "04n": brokenClouds,
+  "09d": showerRain,
+  "09n": showerRain,
+  "10d": dayRain,
+  "10n": nightRain,
+  "11d": thunderstorm,
+  "11n": thunderstorm,
+  "13d": snow,
+  "13n": snow,
+  "50d": mist,
+  "50n": mist,
+};
 
 export default function getIconByCode(code: string): string {
-  const match = weatherIcons.find((icon) => icon.code === code);
-  return match.url;
+  return weatherIcons[code] || "";
 }

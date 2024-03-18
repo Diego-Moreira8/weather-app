@@ -1,3 +1,8 @@
+/*
+  Creates a loading screen to be dynamically retained in the DOM. 
+  It is initially hidden and can be displayed by removing the 'hidden' class.
+*/
+
 export default function createLoadingScreen(): void {
   const root = document.querySelector("#root");
   const loadingOverlay = document.createElement("div");

@@ -1,3 +1,13 @@
+/*
+  Renders a navigation bar with a search functionality.
+  It creates a button to open the search overlay, which contains
+  an input field and a search button. The search functionality
+  triggers a search operation when the user inputs a value and 
+  presses Enter or clicks the search button. The container can 
+  be closed by clicking outside of it. The search functionality
+  is handled by the 'handleSearch' module.
+*/
+
 import handleSearch from "./handleSearch";
 import searchIcon from "../images/search.svg";
 
@@ -25,22 +35,20 @@ export default function renderNav(): void {
     }
   };
 
-  const getEnterPress = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
-      search();
-    }
-  };
-
-  const handleSearchBtn = () => {
-    search();
-    input.focus();
-  };
-
   const search = () => {
     if (input.value) {
       handleSearch(input.value);
       searchOverlay.classList.add(HIDDEN);
     }
+  };
+
+  const getEnterPress = (e: KeyboardEvent) => {
+    if (e.key === "Enter") search();
+  };
+
+  const handleSearchBtn = () => {
+    search();
+    input.focus(); // Focus returns if there is no input
   };
 
   label.textContent = "Digite o nome da cidade:";
@@ -57,10 +65,9 @@ export default function renderNav(): void {
   openSearchBtn.classList.add("open-search-btn");
   searchIconElement.classList.add("search-icon");
   searchOverlay.classList.add("search-overlay");
+  searchOverlay.classList.add(HIDDEN);
   searchContainer.classList.add("search-container");
   searchBtn.classList.add("search-btn");
-
-  searchOverlay.classList.add(HIDDEN);
 
   openSearchBtn.addEventListener("click", openSearch);
   searchOverlay.addEventListener("click", handleOverlayClick);

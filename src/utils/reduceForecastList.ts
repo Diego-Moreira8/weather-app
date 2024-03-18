@@ -1,24 +1,25 @@
+/*
+  Reduces a list of forecast data to include only the most important conditions
+  with their corresponding icons for the next 5 days.
+*/
+
 import { List as ForecastList } from "../interfaces/Forecast";
 import ReducedForecast from "../interfaces/ReducedForecast";
+
+// Array defining the priority of weather conditions, with higher index indicating more severe conditions
+const CONDITIONS: string[] = [
+  "clear",
+  "clouds",
+  "atmosphere",
+  "drizzle",
+  "rain",
+  "snow",
+  "thunderstorm",
+];
 
 export default function reduceForecastList(
   list: ForecastList[]
 ): ReducedForecast[] {
-  /*
-    Return an array with the most important conditions 
-    with its icons for the next 5 days.
-  */
-
-  const CONDITIONS: string[] = [
-    "clear",
-    "clouds",
-    "atmosphere",
-    "drizzle",
-    "rain",
-    "snow",
-    "thunderstorm",
-  ]; // The more severe the condition, the higher its index
-
   const result: ReducedForecast[] = [];
   const today = new Date();
 
